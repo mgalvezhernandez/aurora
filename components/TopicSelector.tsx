@@ -42,7 +42,7 @@ export function TopicSelector() {
       </header>
 
       <ul className="space-y-3">
-        {topics.map((topic, idx) => {
+        {topics.map((topic) => {
           const isOpen = expanded === topic.id;
           const accent = CATEGORY_ACCENTS[topic.id] ?? CATEGORY_ACCENTS["economia-bienestar"];
           return (
@@ -69,13 +69,8 @@ export function TopicSelector() {
                     aria-hidden
                   />
                   <span>
-                    <span className="flex items-baseline gap-2">
-                      <span className="text-[11px] font-medium uppercase tracking-widest text-muted">
-                        {String(idx + 1).padStart(2, "0")}
-                      </span>
-                      <span className="font-serif text-xl sm:text-2xl text-ink">
-                        {topic.name}
-                      </span>
+                    <span className="font-serif text-xl sm:text-2xl text-ink">
+                      {topic.name}
                     </span>
                     <span className="block text-sm text-muted mt-1 leading-relaxed">
                       {topic.description}
