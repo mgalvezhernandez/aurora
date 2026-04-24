@@ -1,0 +1,44 @@
+[
+  {
+    "id": "economico",
+    "name": "Económico",
+    "extreme1": "Intervencionismo/Socialismo",
+    "extreme5": "Libre Mercado/Capitalismo",
+    "tooltip": "Define tu postura sobre el papel del Estado en la economía. El nivel 1 prioriza la intervención estatal, los servicios públicos y la redistribución de la riqueza. El nivel 5 defiende el libre mercado, la propiedad privada y la mínima interferencia del Estado en los negocios."
+  },
+  {
+    "id": "social",
+    "name": "Social y Moral",
+    "extreme1": "Progresismo",
+    "extreme5": "Conservadurismo",
+    "tooltip": "Mide tu visión sobre los valores culturales. El nivel 1 busca el cambio social, apoya la diversidad y cuestiona las normas tradicionales. El nivel 5 valora preservar las instituciones clásicas, las costumbres, la familia tradicional y el orden moral establecido."
+  },
+  {
+    "id": "identidad",
+    "name": "Identidad y Territorio",
+    "extreme1": "Globalismo/Internacionalismo",
+    "extreme5": "Nacionalismo/Soberanismo",
+    "tooltip": "Evalúa cómo ves la relación de tu país con el mundo. El nivel 1 apoya la cooperación internacional, la apertura de fronteras y una visión cosmopolita. El nivel 5 prioriza la soberanía nacional, el control fronterizo y la protección de la identidad y economía locales."
+  },
+  {
+    "id": "medioambiental",
+    "name": "Medioambiental",
+    "extreme1": "Ecologismo estricto",
+    "extreme5": "Productivismo/Desarrollismo",
+    "tooltip": "Analiza el equilibrio entre ecología y economía. El nivel 1 sitúa la protección del planeta y la lucha climática como prioridad absoluta, incluso si frena el crecimiento. El nivel 5 prioriza el desarrollo industrial, la creación de riqueza y confía en que la tecnología resolverá los retos ambientales."
+  },
+  {
+    "id": "autoridad",
+    "name": "Autoridad",
+    "extreme1": "Libertarismo/Antiautoritarismo",
+    "extreme5": "Estatismo/Autoridad",
+    "tooltip": "Determina el equilibrio entre libertad individual y orden. El nivel 1 defiende la máxima libertad personal sin que el Estado interfiera en las decisiones de la vida privada. El nivel 5 sostiene que es necesaria una autoridad fuerte para garantizar la seguridad, la ley y el orden social."
+  },
+  {
+    "id": "sistema",
+    "name": "Sistema",
+    "extreme1": "Institucionalismo / Tecnocracia",
+    "extreme5": "Populismo / Anti-establishment",
+    "tooltip": "Mide tu nivel de confianza en el sistema actual y sus dirigentes. El nivel 1 confía en las instituciones tradicionales, los expertos y las reformas graduales. El nivel 5 siente profunda desconfianza hacia las élites (políticas, económicas o mediáticas) y exige soluciones directas y radicales."
+  }
+]

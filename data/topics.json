@@ -1,0 +1,122 @@
+[
+  {
+    "id": "economia-bienestar",
+    "name": "Economía y Estado de Bienestar",
+    "description": "El núcleo del debate sobre cómo se genera y se gasta el dinero público.",
+    "subtopics": [
+      {
+        "id": "impuestos",
+        "name": "Impuestos y Fiscalidad",
+        "description": "Presión fiscal, impuestos a la riqueza, IVA, evasión fiscal."
+      },
+      {
+        "id": "empleo",
+        "name": "Empleo y Relaciones Laborales",
+        "description": "Salario mínimo, tipos de contrato, poder de los sindicatos, jornada laboral."
+      },
+      {
+        "id": "educacion",
+        "name": "Educación",
+        "description": "Escuela pública vs. privada/concertada, currículo académico, adoctrinamiento, acceso a la universidad."
+      },
+      {
+        "id": "sanidad",
+        "name": "Sanidad y Dependencia",
+        "description": "Financiación de la sanidad pública, listas de espera, colaboración público-privada, cuidado de mayores."
+      },
+      {
+        "id": "pensiones",
+        "name": "Pensiones y Ayudas Sociales",
+        "description": "Sostenibilidad del sistema de jubilación, ingreso mínimo vital, subsidios."
+      }
+    ]
+  },
+  {
+    "id": "vida-urbana",
+    "name": "Vida Urbana y Organización Social",
+    "description": "Temas que afectan al día a día de los ciudadanos en sus comunidades.",
+    "subtopics": [
+      {
+        "id": "vivienda",
+        "name": "Vivienda y Urbanismo",
+        "description": "Regulación de los alquileres, ocupación, construcción, turismo y gentrificación."
+      },
+      {
+        "id": "inmigracion",
+        "name": "Inmigración y Convivencia",
+        "description": "Integración, control de fronteras, asilo, impacto económico y cultural."
+      },
+      {
+        "id": "seguridad",
+        "name": "Seguridad Ciudadana y Justicia",
+        "description": "Endurecimiento del código penal, actuación policial, reinserción, ocupación ilegal."
+      }
+    ]
+  },
+  {
+    "id": "derechos-civiles",
+    "name": "Derechos Civiles e Identidad",
+    "description": "Los debates más intensos sobre la moralidad, la cultura y las libertades individuales.",
+    "subtopics": [
+      {
+        "id": "feminismo",
+        "name": "Feminismo y Género",
+        "description": "Políticas de igualdad, cuotas, violencia de género, lenguaje inclusivo."
+      },
+      {
+        "id": "lgtbiq",
+        "name": "Derechos LGTBIQ+",
+        "description": "Matrimonio igualitario, leyes de identidad de género, educación afectivo-sexual."
+      },
+      {
+        "id": "libertad-expresion",
+        "name": "Libertad de Expresión y Censura",
+        "description": "Corrección política, cultura de la cancelación, límites del humor, control de redes sociales."
+      },
+      {
+        "id": "bioetica",
+        "name": "Bioética y Vida",
+        "description": "Aborto, eutanasia, gestación subrogada."
+      }
+    ]
+  },
+  {
+    "id": "entorno-ciencia",
+    "name": "Entorno, Ciencia y Futuro",
+    "description": "Cómo gestionar los recursos y los avances tecnológicos que cambiarán la sociedad.",
+    "subtopics": [
+      {
+        "id": "clima",
+        "name": "Medio Ambiente y Clima",
+        "description": "Restricciones por el cambio climático, movilidad urbana, agricultura vs. ecologismo."
+      },
+      {
+        "id": "energia",
+        "name": "Modelo Energético",
+        "description": "Energía nuclear, renovables, dependencia energética exterior."
+      },
+      {
+        "id": "tecnologia-ia",
+        "name": "Tecnología e Inteligencia Artificial",
+        "description": "Regulación de la IA, privacidad de datos, impacto en el empleo, poder de las grandes tecnológicas."
+      }
+    ]
+  },
+  {
+    "id": "estado-mundo",
+    "name": "Estado y Mundo",
+    "description": "La visión macro del país y su papel en el panorama internacional.",
+    "subtopics": [
+      {
+        "id": "modelo-estado",
+        "name": "Modelo de Estado e Instituciones",
+        "description": "Centralización vs. descentralización, regionalismo/independentismo, Monarquía vs. República, reforma electoral."
+      },
+      {
+        "id": "exterior-defensa",
+        "name": "Política Exterior y Defensa",
+        "description": "Pertenencia a organizaciones internacionales (UE/OTAN), gasto militar, conflictos bélicos internacionales, soberanía."
+      }
+    ]
+  }
+]
