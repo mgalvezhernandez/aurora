@@ -33,11 +33,11 @@ export function TopicSelector() {
           Paso 1 de 3 · Tema
         </p>
         <h2 className="font-serif text-4xl sm:text-5xl leading-[1.05] text-ink">
-          ¿Sobre qué quieres <span className="italic">argumentar</span>?
+          ¿Qué tema quieres <span className="italic">explorar</span>?
         </h2>
         <p className="text-muted max-w-xl">
-          Elige una categoría y, dentro de ella, un subtema concreto sobre el que
-          construir el argumentario.
+          Elige una categoría y, dentro de ella, un tema concreto. Luego definirás
+          desde qué postura quieres verlo.
         </p>
       </header>
 

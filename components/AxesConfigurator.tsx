@@ -2,7 +2,7 @@
 
 import axesData from "@/data/axes.json";
 import topicsData from "@/data/topics.json";
-import type { Axis, Topic } from "@/types";
+import type { Axis, AxisValue, Topic } from "@/types";
 import { useAurora } from "@/lib/store";
 import { AxisSlider } from "./AxisSlider";
 import { cn } from "@/lib/utils";
@@ -18,6 +18,65 @@ const CATEGORY_ACCENTS: Record<string, { hex: string; bgSoft: string; border: st
   "estado-mundo":       { hex: "#A88A2E", bgSoft: "rgba(168,138,46,0.06)", border: "rgba(168,138,46,0.22)" },
 };
 
+/**
+ * Presets con posturas ideológicas arquetípicas.
+ * Los valores son orientativos — el usuario puede ajustarlos después.
+ */
+type Preset = {
+  id: string;
+  label: string;
+  description: string;
+  values: Record<string, AxisValue>;
+};
+
+const PRESETS: Preset[] = [
+  {
+    id: "progresista",
+    label: "Progresista",
+    description: "Intervención estatal, apertura social, ecologismo",
+    values: {
+      economico: 2,
+      social: 2,
+      identidad: 2,
+      medioambiental: 2,
+      autoridad: 2,
+    },
+  },
+  {
+    id: "conservadora",
+    label: "Conservadora",
+    description: "Libre mercado moderado, valores tradicionales, orden",
+    values: {
+      economico: 4,
+      social: 5,
+      identidad: 4,
+      medioambiental: 4,
+      autoridad: 4,
+    },
+  },
+  {
+    id: "liberal",
+    label: "Liberal clásica",
+    description: "Libre mercado, libertades individuales, poca intervención",
+    values: {
+      economico: 5,
+      social: 2,
+      medioambiental: 4,
+      autoridad: 1,
+    },
+  },
+  {
+    id: "alternativa",
+    label: "Anti-establishment",
+    description: "Desconfianza en las élites, soberanismo, cambio radical",
+    values: {
+      identidad: 4,
+      autoridad: 3,
+      sistema: 5,
+    },
+  },
+];
+
 export function AxesConfigurator() {
   const {
     topicId,
@@ -25,6 +84,7 @@ export function AxesConfigurator() {
     axes: axesState,
     toggleAxis,
     setAxisValue,
+    applyAxisPreset,
     setStep,
     generate,
     isGenerating,
@@ -42,6 +102,26 @@ export function AxesConfigurator() {
   const accent =
     (topic && CATEGORY_ACCENTS[topic.id]) ??
     CATEGORY_ACCENTS["economia-bienestar"];
+
+  function resetAxes() {
+    applyAxisPreset({});
+  }
+
+  // Detecta si el estado actual coincide con algún preset (para marcarlo como activo)
+  const activePresetId = (() => {
+    for (const p of PRESETS) {
+      const keys = Object.keys(p.values);
+      const stateKeys = Object.entries(axesState)
+        .filter(([, v]) => v.enabled)
+        .map(([id]) => id);
+      if (keys.length !== stateKeys.length) continue;
+      const allMatch = keys.every(
+        (k) => axesState[k]?.enabled && axesState[k]?.value === p.values[k],
+      );
+      if (allMatch) return p.id;
+    }
+    return null;
+  })();
 
   return (
     <div className="space-y-8">
@@ -79,7 +159,7 @@ export function AxesConfigurator() {
                       style={{ backgroundColor: accent.hex }}
                       aria-hidden
                     />
-                    <span className="text-muted">Argumentando sobre</span>
+                    <span className="text-muted">Tema elegido</span>
                   </div>
 
                   <h2 className="mt-2 font-serif text-4xl sm:text-5xl leading-[1.05] tracking-tight text-ink">
@@ -121,33 +201,100 @@ export function AxesConfigurator() {
         )}
 
         <h3 className="mt-10 font-serif text-3xl sm:text-4xl text-ink">
-          Elige tu <span className="italic" style={{ color: accent.hex }}>postura</span>
+          Define la <span className="italic" style={{ color: accent.hex }}>postura</span>
         </h3>
         <p className="mt-2 text-sm text-muted max-w-2xl leading-relaxed">
-          Activa los ejes que quieras usar. Cada eje puede tener un valor entre 1 y 5.
-          Al menos uno debe estar activo.
+          Elige un <strong className="text-ink">punto de partida rápido</strong> o
+          activa manualmente los ejes que quieras combinar. Puedes ajustar los
+          valores en cualquier momento.
         </p>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {axes.map((axis) => {
-          const st = axesState[axis.id] ?? { enabled: false, value: 3 as const };
-          return (
-            <AxisSlider
-              key={axis.id}
-              axis={axis}
-              value={st.value}
-              enabled={st.enabled}
-              onToggle={() => toggleAxis(axis.id)}
-              onChange={(v) => setAxisValue(axis.id, v)}
-            />
-          );
-        })}
-      </div>
+      {/* Presets rápidos */}
+      <section aria-labelledby="presets-heading">
+        <div className="flex items-center justify-between gap-4 mb-3">
+          <h4
+            id="presets-heading"
+            className="text-[11px] font-medium uppercase tracking-[0.2em] text-muted"
+          >
+            Punto de partida rápido
+          </h4>
+          {activeCount > 0 && (
+            <button
+              type="button"
+              onClick={resetAxes}
+              className="text-[11px] text-muted hover:text-ink underline-offset-2 hover:underline"
+            >
+              Empezar de cero
+            </button>
+          )}
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
+          {PRESETS.map((p) => {
+            const active = activePresetId === p.id;
+            return (
+              <button
+                key={p.id}
+                type="button"
+                onClick={() => applyAxisPreset(p.values)}
+                className={cn(
+                  "text-left rounded-xl border bg-white p-3 transition-all hover:-translate-y-0.5",
+                  active
+                    ? "border-ink shadow-paper"
+                    : "border-muted-soft hover:border-ink/40",
+                )}
+              >
+                <span className="flex items-center gap-2">
+                  <span
+                    className={cn(
+                      "h-2 w-2 rounded-full transition-colors",
+                      active ? "bg-accent" : "bg-muted-soft",
+                    )}
+                    aria-hidden
+                  />
+                  <span className="text-sm font-medium text-ink">{p.label}</span>
+                </span>
+                <span className="block text-[11px] text-muted mt-1 leading-snug">
+                  {p.description}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+        <p className="text-[11px] text-muted mt-2 italic">
+          Los presets son puntos de partida orientativos. Puedes modificar cada eje
+          después.
+        </p>
+      </section>
+
+      {/* Ejes manuales */}
+      <section aria-labelledby="axes-heading" className="space-y-3">
+        <h4
+          id="axes-heading"
+          className="text-[11px] font-medium uppercase tracking-[0.2em] text-muted"
+        >
+          O ajusta manualmente
+        </h4>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {axes.map((axis) => {
+            const st = axesState[axis.id] ?? { enabled: false, value: 3 as const };
+            return (
+              <AxisSlider
+                key={axis.id}
+                axis={axis}
+                value={st.value}
+                enabled={st.enabled}
+                onToggle={() => toggleAxis(axis.id)}
+                onChange={(v) => setAxisValue(axis.id, v)}
+              />
+            );
+          })}
+        </div>
+      </section>
 
       {activeCount === 0 && (
         <p className="text-sm text-accent-contrast bg-accent-contrast/10 border border-accent-contrast/30 rounded-md px-4 py-3">
-          Activa al menos un eje ideológico para generar un argumentario.
+          Activa al menos un eje o elige un preset para continuar.
         </p>
       )}
 
@@ -169,10 +316,10 @@ export function AxesConfigurator() {
           {activeCount > 0 ? (
             <>
               <span className="text-ink font-medium">{activeCount}</span>{" "}
-              {activeCount === 1 ? "eje activo" : "ejes activos"} de 6
+              {activeCount === 1 ? "eje incluido" : "ejes incluidos"} de 6
             </>
           ) : (
-            "Ningún eje activo"
+            "Ningún eje incluido"
           )}
         </p>
 
@@ -200,11 +347,11 @@ export function AxesConfigurator() {
             {isGenerating ? (
               <>
                 <Spinner />
-                Construyendo el argumentario desde tu postura...
+                Generando...
               </>
             ) : (
               <>
-                Generar argumentario
+                Generar texto
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
                   <path
                     d="M3 7h8m0 0L7 3m4 4l-4 4"

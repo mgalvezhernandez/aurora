@@ -64,7 +64,7 @@ function parseReferencias(raw: unknown): ReferenciaCultural[] {
     .filter((x): x is ReferenciaCultural => x !== null);
 }
 
-function parseArgumentary(raw: string): Argumentary {
+export function parseArgumentary(raw: string): Argumentary {
   const candidate = extractJson(raw);
   const obj = JSON.parse(candidate);
   if (
@@ -139,5 +139,40 @@ export async function generateArgumentary(userPrompt: string): Promise<Argumenta
       return parseArgumentary(retry);
     }
     throw err;
+  }
+}
+
+/**
+ * Stream de tokens desde Claude.
+ * Emite cada delta de texto conforme llega.
+ */
+export async function* streamClaude(
+  userPrompt: string,
+  extraSystem?: string,
+): AsyncGenerator<string, void, unknown> {
+  const client = getClient();
+  const model = process.env.ANTHROPIC_MODEL || DEFAULT_MODEL;
+  const system = extraSystem ? `${SYSTEM_PROMPT}\n\n${extraSystem}` : SYSTEM_PROMPT;
+
+  const stream = await client.messages.stream({
+    model,
+    max_tokens: 1500,
+    system: [
+      {
+        type: "text",
+        text: system,
+        cache_control: { type: "ephemeral" },
+      },
+    ],
+    messages: [{ role: "user", content: userPrompt }],
+  });
+
+  for await (const event of stream) {
+    if (
+      event.type === "content_block_delta" &&
+      event.delta.type === "text_delta"
+    ) {
+      yield event.delta.text;
+    }
   }
 }

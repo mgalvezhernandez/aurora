@@ -3,9 +3,12 @@
 import Link from "next/link";
 import { useState } from "react";
 import { HowItWorksModal } from "@/components/HowItWorksModal";
+import { ExampleModal } from "@/components/ExampleModal";
 
 export default function LandingPage() {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [howtoOpen, setHowtoOpen] = useState(false);
+  const [exampleOpen, setExampleOpen] = useState(false);
+
   return (
     <main className="relative min-h-[calc(100vh-80px)] flex items-center overflow-hidden">
       <div
@@ -20,7 +23,7 @@ export default function LandingPage() {
       <div className="relative max-w-3xl mx-auto px-6 py-20">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-muted-soft bg-white/70 backdrop-blur text-[11px] font-medium uppercase tracking-[0.18em] text-muted mb-8">
           <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden />
-          Proyecto Aurora · v1
+          Educación · Pensamiento crítico
         </div>
 
         <p className="font-serif text-6xl sm:text-8xl font-bold tracking-tight text-ink leading-none mb-6">
@@ -34,13 +37,9 @@ export default function LandingPage() {
         </h1>
 
         <p className="mt-6 text-lg text-ink/75 max-w-2xl leading-relaxed">
-          Analiza argumentos, identifica sesgos y toma mejores decisiones.
-        </p>
-
-        <p className="mt-4 text-base text-ink/60 max-w-2xl leading-relaxed">
-          Aurora te permite explorar cómo un mismo tema puede argumentarse desde
-          distintas corrientes ideológicas. No para convencerte de nada, sino para
-          que aprendas a reconocer los marcos que hay detrás de cada discurso.
+          Descubre cómo un mismo tema puede argumentarse desde distintas
+          ideologías. Aprende a reconocer los sesgos y los marcos que hay detrás
+          de cada discurso.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -68,8 +67,15 @@ export default function LandingPage() {
           </Link>
           <button
             type="button"
-            onClick={() => setModalOpen(true)}
+            onClick={() => setExampleOpen(true)}
             className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-muted-soft bg-white/60 backdrop-blur text-sm text-ink hover:border-ink/40 transition-colors"
+          >
+            Ver un ejemplo
+          </button>
+          <button
+            type="button"
+            onClick={() => setHowtoOpen(true)}
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-sm text-muted hover:text-ink transition-colors"
           >
             ¿Cómo funciona?
           </button>
@@ -77,9 +83,9 @@ export default function LandingPage() {
 
         <div className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl">
           {[
-            { n: "6", label: "Ejes ideológicos independientes" },
-            { n: "17", label: "Subtemas de actualidad" },
-            { n: "∞", label: "Perspectivas contrastables" },
+            { n: "6", label: "Dimensiones ideológicas" },
+            { n: "17", label: "Temas de actualidad" },
+            { n: "∞", label: "Combinaciones posibles" },
           ].map((stat) => (
             <div key={stat.label} className="border-t border-muted-soft pt-4">
               <div className="font-serif text-3xl text-ink">{stat.n}</div>
@@ -89,13 +95,13 @@ export default function LandingPage() {
         </div>
 
         <p className="mt-14 text-xs text-muted max-w-xl leading-relaxed">
-          Pensado para uso en aula (ESO, Bachillerato, universidad). Un ejercicio
-          dialéctico para fomentar el pensamiento crítico mediante el contraste de
-          perspectivas.
+          Pensado para el aula (ESO, Bachillerato, universidad) y para cualquier
+          persona que quiera entender mejor el discurso público.
         </p>
       </div>
 
-      <HowItWorksModal open={modalOpen} onClose={() => setModalOpen(false)} />
+      <HowItWorksModal open={howtoOpen} onClose={() => setHowtoOpen(false)} />
+      <ExampleModal open={exampleOpen} onClose={() => setExampleOpen(false)} />
     </main>
   );
 }

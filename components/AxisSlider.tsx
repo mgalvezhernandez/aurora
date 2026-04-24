@@ -13,6 +13,14 @@ type Props = {
   onChange: (v: AxisValue) => void;
 };
 
+function qualitativeLabel(axis: Axis, value: AxisValue): string {
+  if (value === 1) return `Marcadamente ${axis.extreme1}`;
+  if (value === 2) return `Tendencia a ${axis.extreme1}`;
+  if (value === 3) return "Posición centrada";
+  if (value === 4) return `Tendencia a ${axis.extreme5}`;
+  return `Marcadamente ${axis.extreme5}`;
+}
+
 export function AxisSlider({ axis, value, enabled, onToggle, onChange }: Props) {
   const sliderId = useId();
   const toggleId = useId();
@@ -26,17 +34,18 @@ export function AxisSlider({ axis, value, enabled, onToggle, onChange }: Props) 
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-2">
-          <h3 className="font-serif text-lg text-ink">
-            Eje {axis.name}
-          </h3>
+          <h3 className="font-serif text-lg text-ink">{axis.name}</h3>
           <InfoTooltip label={`Eje ${axis.name}`}>{axis.tooltip}</InfoTooltip>
         </div>
 
         <label
           htmlFor={toggleId}
           className="flex items-center gap-2 text-sm text-muted cursor-pointer select-none"
+          title={enabled ? "Este eje se incluirá en la postura" : "Este eje no se aplicará"}
         >
-          <span>{enabled ? "Activo" : "Inactivo"}</span>
+          <span className={enabled ? "text-ink font-medium" : ""}>
+            {enabled ? "Incluir" : "No aplica"}
+          </span>
           <span
             className={cn(
               "relative inline-block h-5 w-9 rounded-full transition-colors",
@@ -56,7 +65,7 @@ export function AxisSlider({ axis, value, enabled, onToggle, onChange }: Props) 
             className="sr-only"
             checked={enabled}
             onChange={onToggle}
-            aria-label={`Activar eje ${axis.name}`}
+            aria-label={`Incluir el eje ${axis.name} en la postura`}
           />
         </label>
       </div>
@@ -81,7 +90,7 @@ export function AxisSlider({ axis, value, enabled, onToggle, onChange }: Props) 
           disabled={!enabled}
           onChange={(e) => onChange(Number(e.target.value) as AxisValue)}
           aria-label={`Valor del eje ${axis.name}`}
-          aria-valuetext={`Nivel ${value} de 5`}
+          aria-valuetext={`Nivel ${value} de 5: ${qualitativeLabel(axis, value)}`}
           className="aurora-range"
         />
 
@@ -100,8 +109,9 @@ export function AxisSlider({ axis, value, enabled, onToggle, onChange }: Props) 
         </div>
 
         {enabled && (
-          <p className="text-sm text-muted mt-3">
-            Valor actual: <span className="font-medium text-ink">{value}</span>
+          <p className="text-sm text-ink mt-3 leading-snug">
+            <span className="font-medium">Valor {value}</span>
+            <span className="text-muted"> — {qualitativeLabel(axis, value)}</span>
           </p>
         )}
       </div>

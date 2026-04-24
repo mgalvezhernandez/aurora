@@ -47,7 +47,7 @@ Devuelve un JSON con esta estructura exacta:
   "argumentos": [
     {
       "subtitulo": "Nombre del argumento 1",
-      "desarrollo": "2-3 frases desarrollando el argumento con datos o lógica concreta"
+      "desarrollo": "1-2 frases directas y concretas, sin rodeos"
     }
   ],
   "cierre": "Párrafo final con pregunta retórica o llamada a la reflexión (30-50 palabras)",
@@ -72,7 +72,8 @@ Devuelve un JSON con esta estructura exacta:
 - Los datos que cites deben ser plausibles; si no estás seguro, usa formulaciones como "diversos estudios indican" en lugar de inventar cifras concretas.
 - Incluye 2 o 3 argumentos principales (no menos de 2, no más de 3).
 - Incluye entre 3 y 4 preguntas para el aula.
-- Longitud total del argumentario (sin contar preguntas_aula y referencias_culturales): entre 200 y 300 palabras.
+- Cada argumento (desarrollo) debe tener como máximo 2 frases cortas y directas: ve al grano, sin retórica ni relleno.
+- Longitud total del argumentario (sin contar preguntas_aula y referencias_culturales): entre 150 y 220 palabras.
 
 ## REGLAS PARA referencias_culturales
 Esta sección enseña a identificar cómo la ficción audiovisual construye narrativas coherentes con posturas ideológicas concretas. Es fundamental que incluyas referencias: cine y series son un vehículo natural de posturas ideológicas sobre estos temas.

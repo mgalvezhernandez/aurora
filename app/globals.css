@@ -79,3 +79,101 @@ input[type="range"].aurora-range:disabled::-moz-range-thumb {
   background: #a8a29e;
   box-shadow: 0 0 0 1px #a8a29e;
 }
+
+/* Estilos de impresión / PDF */
+@page {
+  size: A4;
+  margin: 1.6cm 1.4cm;
+}
+
+@media print {
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 10.5pt;
+  }
+
+  /* Cabecera de impresión con marca (si está presente) */
+  main {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  /* Ocultar elementos interactivos y de navegación */
+  nav,
+  header.print-hidden,
+  .print\:hidden,
+  button:not(.print-keep),
+  [role="button"]:not(.print-keep) {
+    display: none !important;
+  }
+
+  /* Quitar fondos, sombras y bordes decorativos */
+  article {
+    box-shadow: none !important;
+    border: 1px solid #d6d3d1 !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    margin-bottom: 1.5rem !important;
+  }
+
+  /* Ajustar tipografía para papel */
+  h1,
+  h2,
+  h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* Evitar cortar argumentos a mitad */
+  .aurora-prose > div,
+  li,
+  blockquote {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Abrir los elementos colapsables automáticamente al imprimir */
+  details {
+    display: block !important;
+  }
+  details > summary {
+    display: none !important;
+  }
+
+  /* Que aparezca el contenido de secciones colapsadas */
+  [aria-expanded="false"] + div,
+  [aria-expanded="false"] ~ ol,
+  [aria-expanded="false"] ~ ul {
+    display: block !important;
+  }
+
+  /* Mantener la sección de referencias culturales visible al imprimir */
+  section[aria-label="El argumento en la ficción"] {
+    display: block !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #d6d3d1 !important;
+  }
+  section[aria-label="El argumento en la ficción"] * {
+    color: #000000 !important;
+  }
+
+  /* Controlar saltos de página */
+  .page-break-before {
+    page-break-before: always;
+    break-before: page;
+  }
+
+  /* Asegurar que los enlaces sean visibles */
+  a {
+    color: #000000 !important;
+    text-decoration: underline;
+  }
+
+  /* Footer fijo oculto en impresión */
+  footer {
+    display: none !important;
+  }
+}
