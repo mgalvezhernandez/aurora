@@ -23,17 +23,24 @@ export default function LandingPage() {
           Proyecto Aurora · v1
         </div>
 
-        <h1 className="font-serif text-5xl sm:text-7xl leading-[1.02] text-ink tracking-tight">
-          Un mismo tema,
+        <p className="font-serif text-6xl sm:text-8xl font-bold tracking-tight text-ink leading-none mb-6">
+          Aurora
+        </p>
+
+        <h1 className="font-serif text-4xl sm:text-6xl leading-[1.05] text-ink tracking-tight">
+          Entrena tu
           <br />
-          <span className="italic text-accent">distintas miradas.</span>
+          <span className="italic text-accent">pensamiento crítico.</span>
         </h1>
 
-        <p className="mt-8 text-lg text-ink/75 max-w-2xl leading-relaxed">
+        <p className="mt-6 text-lg text-ink/75 max-w-2xl leading-relaxed">
+          Analiza argumentos, identifica sesgos y toma mejores decisiones.
+        </p>
+
+        <p className="mt-4 text-base text-ink/60 max-w-2xl leading-relaxed">
           Aurora te permite explorar cómo un mismo tema puede argumentarse desde
           distintas corrientes ideológicas. No para convencerte de nada, sino para
-          que aprendas a reconocer los distintos marcos de pensamiento que hay
-          detrás de cada discurso y fomentar tu pensamiento crítico.
+          que aprendas a reconocer los marcos que hay detrás de cada discurso.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-4">
